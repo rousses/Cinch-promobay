@@ -10,6 +10,14 @@ module Cinch::Plugins
       super
     end
 
-    html = open(@source).read
+    def geturl()
+      html = open(@source).read
+      @url = html.scan(/(https\:\/\/www.youtube-nocookie.com(.+)(?=\?))/)
+    end
+
+    match(/promo (.+)/)
+      geturl()
+      reply = Format(:bold, "Today on The Promo Bay : " @url)
+
   end
 end
